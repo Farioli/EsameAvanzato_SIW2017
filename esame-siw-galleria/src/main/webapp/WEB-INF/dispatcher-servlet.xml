@@ -9,20 +9,16 @@
 	<mvc:annotation-driven />
 	<mvc:resources mapping="/resources/**" location="/resources/css"/>
 	<mvc:resources mapping="/resources/**" location="/resources/images"/>
-	<mvc:resources mapping="/resources/**" location="/resources/fonts"/>
-	<mvc:resources mapping="/resources/**" location="/resources/js"/>
-	<mvc:resources mapping="/resources/**" location="/resources/pictureArt" />
 	
 	
 	<context:component-scan base-package="it.uniroma3.galleria.controller" />
    	<context:component-scan base-package="it.uniroma3.galleria.service" />
    	<context:component-scan base-package="it.uniroma3.galleria.repository" />
-   	<context:component-scan base-package="it.uniroma3.galleria" />
+   	<context:component-scan base-package="it.uniroma3.galleria.configuration" />
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-		<property name="viewClass"
-			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp"/>
 	</bean>

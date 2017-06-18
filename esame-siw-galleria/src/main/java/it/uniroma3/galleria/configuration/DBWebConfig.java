@@ -1,4 +1,4 @@
-package it.uniroma3.galleria;
+package it.uniroma3.galleria.configuration;
 
 import java.util.Properties;
 

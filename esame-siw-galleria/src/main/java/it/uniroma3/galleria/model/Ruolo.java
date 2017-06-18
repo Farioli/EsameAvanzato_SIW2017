@@ -18,7 +18,6 @@ public class Ruolo {
 	private String nome;
 	
 	@ManyToMany(mappedBy="ruoli")
-	@JoinTable
 	private List<Utente> utenti;
 
 	public Long getId() {

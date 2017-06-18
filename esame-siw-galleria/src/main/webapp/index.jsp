@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-<%@ include file="../layout/taglib.jsp"%>
+<%@ include file="WEB-INF/layout/taglib.jsp"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 
 <!DOCTYPE html>
@@ -39,7 +39,10 @@
 		</ul>
 
 		<ul class="nav navbar-nav navbar-right">
-			<li><a href="<spring:url value="/registratore-utente"/>"><span class="glyphicon glyphicon-user"></span> Registrati </a></li>
+		
+			<security:authorize access="/ isAuthenticated()">
+				<li><a href="<spring:url value="/formUtente"/>"><span class="glyphicon glyphicon-user"></span> Registrati </a></li>
+			</security:authorize>
 		
 			
 			<security:authorize access="/ isAuthenticated()">
@@ -69,15 +72,15 @@
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner">
 			<div class="item active">
-				<img src="/resources/tempio.jpg" alt="Quadro_1">
+				<img src="/resources/images/tempio.jpg" alt="Quadro_1">
 			</div>
 
 			<div class="item">
-				<img src="/resources/ship.jpg" alt="Quadro_2">
+				<img src="/resources/images/ship.jpg" alt="Quadro_2">
 			</div>
 
 			<div class="item">
-				<img src="/resources/sea.jpg" alt="Quadro_3">
+				<img src="/resources/images/sea.jpg" alt="Quadro_3">
 			</div>
 		</div>
 

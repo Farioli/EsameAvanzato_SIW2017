@@ -28,6 +28,12 @@ public class OperaService {
 		operaRepository.delete(id);
 	}
 	
+	@PreAuthorize("hasRole('RUOLO_AMMINISTRATORE')")
+	public void delete(Opera opera) {
+		operaRepository.delete(opera);
+		
+	}
+	
 	public List<Opera> findAll(){
 		return operaRepository.findAll();
 	}
@@ -40,7 +46,9 @@ public class OperaService {
 		return operaRepository.findByTitolo(titolo);
 	}
 	
-	public List<Opera> findByAnno(int anno){
+	public List<Opera> findByAnno(String dataAnno){
+		Integer anno = Integer.parseInt(dataAnno);
 		return operaRepository.findByAnno(anno);
 	}
+
 }

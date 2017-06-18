@@ -18,18 +18,18 @@ public class Opera {
 	@GeneratedValue()
 	private Long id;
 	
-	@Size(min=1, message="Il nome deve essere di minimo un carattere")
+	@NotNull(message="Campo obbligatorio")
 	private String titolo;
 	
 	@Min(value=1, message="L'anno non può essere negativo!")
 	@NotNull(message="Campo obbligatorio")
-	private int anno;
+	private Integer anno;
 	
 	@NotNull(message="Campo obbligatorio")
 	private String tecnica;
 	
 	@NotNull(message="Campo obbligatorio")
-	@Column(name="dimensione_base")
+	@Column(name="dimensione_altezza")
 	private float dimensioneAltezza;
 	
 	@NotNull(message="Campo obbligatorio")
@@ -57,11 +57,11 @@ public class Opera {
 		this.titolo = titolo;
 	}
 
-	public int getAnno() {
+	public Integer getAnno() {
 		return anno;
 	}
 
-	public void setAnno(int anno) {
+	public void setAnno(Integer anno) {
 		this.anno = anno;
 	}
 

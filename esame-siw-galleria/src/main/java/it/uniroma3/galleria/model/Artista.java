@@ -3,36 +3,40 @@ package it.uniroma3.galleria.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Artista {
 
-	//ATTENIONE = gestione lazy delle opere porta problemi a livello di transazioni
-	// gestire adeguatamente. (16)
-	
 	@Id
 	@GeneratedValue()
 	private Long id;
 	
+	@NotNull(message="Campo obbligatorio")
 	private String nome;
 	
+	@NotNull(message="Campo obbligatorio")
 	private String cognome;
 	
+	@NotNull(message="Campo obbligatorio")
 	private String nazionalita;
 	
 	@Temporal(TemporalType.DATE)
+	@NotNull(message="Campo obbligatorio")
 	private Date dataNascita;
 	
 	@Temporal(TemporalType.DATE)
 	private Date dataMorte;
 	
-	@OneToMany(mappedBy = "artista")
+	@OneToMany(mappedBy = "artista" ,cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
 	private List<Opera> opere;
 
 	public Long getId() {

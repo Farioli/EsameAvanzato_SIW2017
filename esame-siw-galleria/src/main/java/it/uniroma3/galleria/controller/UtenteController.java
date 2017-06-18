@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.uniroma3.galleria.model.Artista;
 import it.uniroma3.galleria.model.Utente;
@@ -24,8 +25,6 @@ public class UtenteController {
 	@Autowired
 	private UtenteService utenteService;
 	
-	@Autowired
-	private ArtistaService artistaService;
 	
 	@ModelAttribute("utente")
 	public Utente construtto(){
@@ -39,11 +38,21 @@ public class UtenteController {
 		return "dettagli-utente";
 	}
 	
-	@RequestMapping("artista/rimuovi/{id}")
-	public String rimuoviArtista(@PathVariable long id){
-		Artista artista = artistaService.findOne(id);
-		artistaService.delete(artista);
-		return "redirect:/artisti.html";
+	@RequestMapping("/registratore")
+	public String mostraRegistritatore(){
+		return "formUtente";
+	}
+	
+	@RequestMapping(value="/registratore", method=RequestMethod.POST)
+	public String eseguiRegistritazione(@Valid @ModelAttribute("utente") Utente utente, BindingResult risultato, RedirectAttributes redirectAttributes){
+		if(risultato.hasErrors()){
+			return "formUtente";
+		}
+		else{
+			utenteService.save(utente);
+			redirectAttributes.addFlashAttribute("success",true);
+			return "redirect:/formUtente";
+		}
 	}
 	
 

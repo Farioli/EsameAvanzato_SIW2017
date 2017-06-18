@@ -9,10 +9,18 @@
 	<global-method-security pre-post-annotations="enabled"/>
 
 	<http use-expressions="true">
+		<intercept-url pattern="/artista**" access="hasRole('RUOLO_UTENTE')"/>
+		<intercept-url pattern="/artista/**" access="hasRole('RUOLO_UTENTE')"/>
+		<intercept-url pattern="/artisti**" access="hasRole('RUOLO_UTENTE')"/>
+		<intercept-url pattern="/artisti/**" access="hasRole('RUOLO_UTENTE')"/>
+		<intercept-url pattern="/artisti/remove/**" access="hasRole('RUOLO_AMMINISTRATORE')"/>
+		<intercept-url pattern="/opera/remove/**" access="hasRole('RUOLO_AMMINISTRATORE')"/>
 		<intercept-url pattern="/utenti**" access="hasRole('RUOLO_AMMINISTRATORE')"/>
-		<intercept-url pattern="/utenti/**" access="hasRole('ROOLO_AMMINISTRATORE')"/>
-		<intercept-url pattern="/account**" access="hasRole('RUOLO_UTENTE')"/>
-		<form-login login-page="/login"/>
+		<intercept-url pattern="/utenti/**" access="hasRole('RUOLO_AMMINISTRATORE')"/>
+		
+		
+		
+		<form-login login-page="/login" authentication-failure-url="/login?error=true" username-parameter="email" password-parameter="password"/>
 		<logout logout-url="/logout"/>
 	</http>
 	
@@ -22,7 +30,7 @@
 			<password-encoder hash="bcrypt"/>
 			
 			<jdbc-user-service data-source-ref="dataSource"
-				authorities-by-username-query="select app_utente.nome, ruolo.nome from app_utente
+				authorities-by-username-query="select app_utente.email, ruolo.nome from app_utente
 											   join app_utente_ruolo on app_utente.id = app_utente_ruolo.utente_id
 											   join ruolo on app_utente_ruolo.ruolo_id = ruolo.id
 											   where app_utente.nome = ?"

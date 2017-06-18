@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.uniroma3.galleria.model.Opera;
 import it.uniroma3.galleria.model.Utente;
@@ -44,12 +45,15 @@ public class OperaController {
 	}
 	
 	@RequestMapping(value="/formOpera", method=RequestMethod.POST)
-	public String registraOpera(@Valid @ModelAttribute("opera") Opera opera, BindingResult risultato){
+	public String registraOpera(@Valid @ModelAttribute("opera") Opera opera, BindingResult risultato, RedirectAttributes redirectAttributes){
 		if(risultato.hasErrors()){
 			return "formOpera";
 		}
-		operaService.save(opera);
-		return "redirect:/formOpera.html?success=true";
+		else{
+			operaService.save(opera);
+			redirectAttributes.addFlashAttribute("success",true);
+			return "redirect:/formOpera";
+		}
 	}
 	
 

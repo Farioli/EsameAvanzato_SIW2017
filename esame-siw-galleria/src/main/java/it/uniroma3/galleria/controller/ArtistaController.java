@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.uniroma3.galleria.model.Artista;
 import it.uniroma3.galleria.model.Opera;
@@ -44,9 +45,15 @@ public class ArtistaController {
 	}
 	
 	@RequestMapping(value="/formArtista", method=RequestMethod.POST)
-	public String registraArtista(@Valid @ModelAttribute("artista") Artista artista, BindingResult risultato){
-		artistaService.save(artista);
-		return "redirect:/formArtista.html?success=true";
+	public String registraArtista(@Valid @ModelAttribute("artista") Artista artista, BindingResult risultato, RedirectAttributes redirectAttributes){
+		if(risultato.hasErrors()){
+			return "form-Artista";
+		}
+		else{
+			artistaService.save(artista);
+			redirectAttributes.addFlashAttribute("success",true);
+			return "redirect:/formArtista";
+		}
 	}
 	
 

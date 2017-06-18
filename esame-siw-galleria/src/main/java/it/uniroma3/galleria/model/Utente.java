@@ -7,8 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
@@ -21,19 +23,19 @@ public class Utente {
 	@GeneratedValue()
 	private Long id;
 	
-	@Size(min=3, message="Il nome deve essere minimo di 3 caratteri")
+	@NotNull(message="Campo obbligatorio")
 	private String nome;
 		
 	@Size(min=1, message="Email non valida!")
-	@Email
+	@Email(message="Email non valida!")
 	@Column(unique=true)
 	private String email;
 	
 	@Size(min=5, message="La password deve essere minimo di 5 caratteri")
 	private String password;
 	
-	@ManyToMany(mappedBy="utenti")
-	@JoinColumn
+	@ManyToMany
+	@JoinTable
 	private List<Ruolo> ruoli;
 	
 	private boolean enabled;

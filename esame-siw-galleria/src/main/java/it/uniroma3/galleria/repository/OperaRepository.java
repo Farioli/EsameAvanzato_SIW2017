@@ -12,7 +12,7 @@ public interface OperaRepository extends JpaRepository <Opera, Long> {
 	
 	Opera findByTitolo(String titolo);
 
-	List<Opera> findByAnno(int anno);
+	List<Opera> findByAnno(Integer anno);
 	
 	List<Opera> findByArtista(Artista artista);
 
