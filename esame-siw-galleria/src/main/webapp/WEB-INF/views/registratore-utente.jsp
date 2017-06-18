@@ -11,19 +11,17 @@
 <body>
 
 	<form:form comandName="utente" cssClass="form-horizzontal">
+	
+	<c:if test="${success eq true }">
+		<div class="alert alert-success"> Registrazione completata!</div>
+	</c:if>
+	
+	
 		<div class="form-group">
 			<label for="nome" class="col-sm-2 control-label">Nome:</label>
 				<div class="col-sm-10">
 					<form:input path="nome" cssClass="form-control" />
 					<form:errors path="nome" />
-				</div>
-		</div>
-		
-		<div class="form-group">
-			<label for="cognome" class="col-sm-2 control-label">Cognome:</label>
-				<div class="col-sm-10">
-					<form:input path="cognome" cssClass="form-control" />
-					<form:errors path="cognome" />
 				</div>
 		</div>
 		
@@ -50,10 +48,6 @@
 			</div>
 		</div>
 			
-			
-		
-		
-	
 	</form:form>
 
 </body>

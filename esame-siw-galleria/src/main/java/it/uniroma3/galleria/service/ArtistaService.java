@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import it.uniroma3.galleria.model.Artista;
@@ -27,13 +28,32 @@ public class ArtistaService {
 		return artistaRepository.findOne(id); 
 	}
 	
-	@Transactional
+	public List<Artista> findAll() {
+		return artistaRepository.findAll();
+	}
+	
+	
+	/*@Transactional
 	public Artista findOneWithOpere(long id){
 		Artista artista = findOne(id);
 		List<Opera> opere = operaRepository.findByArtista(artista, new PageRequest(0,10,Direction.DESC,"anno"));
 		artista.setOpere(opere);
 		return artista;
+	} */
+
+	@PreAuthorize("hasRole('RUOLO_AMMINISTRATORE')")
+	public void save(Artista artista) {
+		artistaRepository.save(artista);
 	}
 	
+	@PreAuthorize("hasRole('RUOLO_AMMINISTRATORE')")
+	public void delete(long id) {
+		artistaRepository.delete(id);
+	}
+	
+	@PreAuthorize("hasRole('RUOLO_AMMINISTRATORE')")
+	public void delete(Artista artista) {
+		artistaRepository.delete(artista);
+	}
 
 }

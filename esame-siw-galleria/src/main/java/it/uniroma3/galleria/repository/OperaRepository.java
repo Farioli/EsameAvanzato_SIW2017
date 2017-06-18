@@ -10,6 +10,10 @@ import it.uniroma3.galleria.model.Opera;
 
 public interface OperaRepository extends JpaRepository <Opera, Long> {
 	
-	List<Opera> findByArtista(Artista artista, Pageable pageable);
+	Opera findByTitolo(String titolo);
+
+	List<Opera> findByAnno(int anno);
+	
+	List<Opera> findByArtista(Artista artista);
 
 }

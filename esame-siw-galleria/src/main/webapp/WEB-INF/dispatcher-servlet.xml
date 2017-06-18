@@ -1,16 +1,24 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<mvc:annotation-driven />
-	<context:component-scan base-package="it.uniroma3.galleria.controller" />
+	<mvc:resources mapping="/resources/**" location="/resources/css"/>
+	<mvc:resources mapping="/resources/**" location="/resources/images"/>
+	<mvc:resources mapping="/resources/**" location="/resources/fonts"/>
+	<mvc:resources mapping="/resources/**" location="/resources/js"/>
+	<mvc:resources mapping="/resources/**" location="/resources/pictureArt" />
 	
+	
+	<context:component-scan base-package="it.uniroma3.galleria.controller" />
+   	<context:component-scan base-package="it.uniroma3.galleria.service" />
+   	<context:component-scan base-package="it.uniroma3.galleria.repository" />
+   	<context:component-scan base-package="it.uniroma3.galleria" />
+
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass"
@@ -19,4 +27,6 @@
 		<property name="suffix" value=".jsp"/>
 	</bean>
 
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	</bean>
 </beans>

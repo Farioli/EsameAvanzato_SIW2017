@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@ include file="../layout/taglib.jsp" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -15,22 +16,25 @@
 		<thead>
 			<tr>
 				<th>Nome Utente</th>
+				
 				<th>Operazioni</th>
+				
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${utenti}" var="utente">
 				<tr>
-					<td><a href="<spring:url value="/utenti/${utente.id}.html" />">
-							<c:out value="${utente.name}" />
-					</a></td>
-					<td><a
-						href="<spring:url value="/utenti/remove/${utente.id}.html" />"
-						class="btn btn-danger triggerRemove"> remove </a></td>
+					<td>	
+						<a href="<spring:url value="/utenti/${utente.id}.html" />"> <c:out value="${utente.name}" /> </a>
+					</td>
+					<td>
+						<a href="<spring:url value="/utenti/rimuovi/${utente.id}.html" />" class="btn btn-danger"> remove </a>
+					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	
 
 </body>
 </html>
